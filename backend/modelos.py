@@ -22,6 +22,7 @@ class AlumnoDB(Base):
     nombre = Column(String, nullable=False)
     apellido = Column(String, nullable=False)
     legajo = Column(Integer, unique=True, nullable=False)
+    mail = Column(String, unique=True, nullable=False) 
     materias = relationship('MateriaDB', secondary=materia_alumno, back_populates='alumnos')
 
 class MateriaDB(Base):
