@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Table, ForeignKey
+from sqlalchemy import Column, Integer, String, Table, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from .db import Base
 
@@ -40,3 +40,20 @@ class ProfesorDB(Base):
     apellido = Column(String, nullable=False)
     legajo = Column(Integer, unique=True, nullable=False)
     materias = relationship('MateriaDB', secondary=materia_profesor, back_populates='profesores') 
+
+class MaterialDB(Base):
+    __tablename__ = 'materiales'
+    id = Column(Integer, primary_key=True, index=True)
+    titulo = Column(String, nullable=False)
+    descripcion = Column(String, nullable=True)
+    archivo = Column(String, nullable=False)  # Ruta o nombre del archivo
+
+class TareaDB(Base):
+    __tablename__ = 'tareas'
+    id = Column(Integer, primary_key=True, index=True)
+    titulo = Column(String, nullable=False)
+    descripcion = Column(String, nullable=True)
+    materia_id = Column(Integer, ForeignKey('materias.id'), nullable=False)
+    apartado = Column(String, nullable=True)  # Ruta o nombre del archivo entregado
+    entregada = Column(Boolean, default=False)
+    materia = relationship('MateriaDB', backref='tareas') 
