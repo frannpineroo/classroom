@@ -21,12 +21,14 @@ class AlumnoCreate(BaseModel):
     nombre: str
     apellido: str
     legajo: int
+    mail: str
 
 class AlumnoOut(BaseModel):
     id: int
     nombre: str
     apellido: str
     legajo: int
+    mail: str
     class Config:
         orm_mode = True
 
