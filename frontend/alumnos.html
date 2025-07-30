@@ -2,14 +2,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Alumnos - Aula Virtual</title>
-    <link rel="stylesheet" href="alumnos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Alumnos - Aula Virtual</title>
+    <link rel="stylesheet" href="/static/css/alumnos.css">
 </head>
 <body>
-    <h1>Lista de Alumnos</h1>
-    <button id="cargarAlumnos">Cargar alumnos</button>
-    <ul id="listaAlumnos"></ul>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Lista de Alumnos</h1>
+            <p>Gestiona los estudiantes de tu aula virtual</p>
+        </div>
+        
+        <div class="content">
+            <div class="actions">
+                <button id="cargarAlumnos" class="btn btn-secondary">
+                    🔄 Cargar Alumnos
+                </button>
+                <a href="/crear-alumnos-page" class="btn btn-primary">
+                    ➕ Crear Nuevo Alumno
+                </a>
+            </div>
 
-    <script src="alumnos.js"></script>
+            <div id="loading" class="loading" style="display: none;">
+                <h3>Cargando alumnos...</h3>
+                <p>Por favor espera mientras obtenemos la información</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <div class="table-container">
+                <table id="tablaAlumnos" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Legajo</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaAlumnos">
+                        <!-- Los alumnos se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>No hay alumnos registrados</h3>
+                <p>Comienza agregando el primer alumno a tu aula virtual</p>
+                <a href="/crear-alumnos-page" class="btn btn-primary" style="margin-top: 15px;">
+                    ➕ Crear Primer Alumno
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/alumnos.js"></script>
 </body>
 </html>

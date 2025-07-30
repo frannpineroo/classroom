@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Alumno - Aula Virtual</title>
+    <link rel="stylesheet" href="/static/css/crearAlumnos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>➕ Crear Nuevo Alumno</h1>
+            <p>Agrega un nuevo estudiante a tu aula virtual</p>
+        </div>
+        
+        <div class="content">
+            <div id="success-message" class="success-message">
+                ✅ ¡Alumno creado exitosamente! Redirigiendo a la lista...
+            </div>
+
+            <div id="loading" class="loading">
+                <h3>Creando alumno...</h3>
+                <p>Por favor espera mientras guardamos la información</p>
+            </div>
+
+            <form id="formAlumno">
+                <div class="form-group">
+                    <label for="nombre">Nombre <span class="required">*</span></label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <div class="error-message" id="nombre-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido <span class="required">*</span></label>
+                    <input type="text" id="apellido" name="apellido" required>
+                    <div class="error-message" id="apellido-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="legajo">Legajo <span class="required">*</span></label>
+                    <input type="text" id="legajo" name="legajo" required>
+                    <div class="error-message" id="legajo-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mail">Email <span class="required">*</span></label>
+                    <input type="email" id="mail" name="mail" required>
+                    <div class="error-message" id="mail-error"></div>
+                </div>
+
+                <div class="actions">
+                    <a href="/alumnos-page" class="btn btn-secondary">
+                        ← Volver a la Lista
+                    </a>
+                    <button type="submit" id="btnCrear" class="btn btn-primary">
+                        💾 Crear Alumno
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/crearAlumnos.js"></script>
+</body>
+</html> 
