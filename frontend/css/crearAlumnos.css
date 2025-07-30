@@ -6,31 +6,35 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     min-height: 100vh;
     padding: 20px;
+    color: #ffffff;
 }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
-    background: white;
+    background: #1e1e1e;
     border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     overflow: hidden;
+    border: 1px solid #333;
 }
 
 .header {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
     color: white;
     padding: 30px;
     text-align: center;
+    border-bottom: 3px solid #00aaff;
 }
 
 .header h1 {
     font-size: 2.2rem;
     margin-bottom: 10px;
     font-weight: 300;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .header p {
@@ -40,6 +44,7 @@ body {
 
 .content {
     padding: 30px;
+    background: #1e1e1e;
 }
 
 .form-group {
@@ -50,34 +55,35 @@ body {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #495057;
+    color: #00aaff;
     font-size: 1rem;
 }
 
 .form-group input {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #e9ecef;
+    border: 2px solid #444;
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: #f8f9fa;
+    background: #2d2d2d;
+    color: #ffffff;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #667eea;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #0066cc;
+    background: #333;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
 }
 
 .form-group input.error {
-    border-color: #dc3545;
-    background: #fff5f5;
+    border-color: #ff4444;
+    background: #2d1a1a;
 }
 
 .error-message {
-    color: #dc3545;
+    color: #ff6b6b;
     font-size: 0.9rem;
     margin-top: 5px;
     display: none;
@@ -97,24 +103,27 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
     color: white;
+    border: 2px solid #00aaff;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 153, 255, 0.4);
+    background: linear-gradient(135deg, #0052a3 0%, #0077cc 100%);
 }
 
 .btn-secondary {
-    background: #f8f9fa;
-    color: #495057;
-    border: 2px solid #e9ecef;
+    background: #2d2d2d;
+    color: #ffffff;
+    border: 2px solid #0066cc;
 }
 
 .btn-secondary:hover {
-    background: #e9ecef;
+    background: #3d3d3d;
     transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 102, 204, 0.3);
 }
 
 .btn:disabled {
@@ -133,24 +142,24 @@ body {
 }
 
 .success-message {
-    background: #d4edda;
-    color: #155724;
+    background: #1a2d1a;
+    color: #4caf50;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
-    border: 1px solid #c3e6cb;
+    border: 1px solid #4caf50;
     display: none;
 }
 
 .loading {
     text-align: center;
     padding: 20px;
-    color: #6c757d;
+    color: #cccccc;
     display: none;
 }
 
 .required {
-    color: #dc3545;
+    color: #ff4444;
 }
 
 @media (max-width: 768px) {
