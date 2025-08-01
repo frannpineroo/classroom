@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from connections.alumnos import router as alumnos_router
+from connections.materias import router as materias_router
+from connections.profesores import router as profesores_router
+from connections.materiales import router as materiales_router
+from connections.tareas import router as tareas_router
 
 app = FastAPI()
 
@@ -18,10 +22,16 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 app.include_router(alumnos_router)
+app.include_router(materias_router)
+app.include_router(profesores_router)
+app.include_router(materiales_router)
+app.include_router(tareas_router)
 
 @app.get("/")
 def read_root():
-    return {"mensaje": "¡Bienvenido a la API del aula virtual!"}
+    """Redirigir a la página principal"""
+    from fastapi.responses import FileResponse
+    return FileResponse("frontend/index.html")
 
 @app.get("/alumnos-page")
 def alumnos_page():
@@ -33,4 +43,34 @@ def alumnos_page():
 def crear_alumnos_page():
     """Redirigir a la página de crear alumnos"""
     from fastapi.responses import FileResponse
-    return FileResponse("frontend/crearAlumnos.html") 
+    return FileResponse("frontend/crearAlumnos.html")
+
+@app.get("/materias-page")
+def materias_page():
+    """Redirigir a la página de materias"""
+    from fastapi.responses import FileResponse
+    return FileResponse("frontend/materias.html")
+
+@app.get("/crear-materia-page")
+def crear_materia_page():
+    """Redirigir a la página de crear materias"""
+    from fastapi.responses import FileResponse
+    return FileResponse("frontend/crearMateria.html")
+
+@app.get("/profesores-page")
+def profesores_page():
+    """Redirigir a la página de profesores"""
+    from fastapi.responses import FileResponse
+    return FileResponse("frontend/profesores.html")
+
+@app.get("/materiales-page")
+def materiales_page():
+    """Redirigir a la página de materiales"""
+    from fastapi.responses import FileResponse
+    return FileResponse("frontend/materiales.html")
+
+@app.get("/tareas-page")
+def tareas_page():
+    """Redirigir a la página de tareas"""
+    from fastapi.responses import FileResponse
+    return FileResponse("frontend/tareas.html") 

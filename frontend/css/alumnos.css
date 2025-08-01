@@ -2,14 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    min-height: 100vh;
+    height: 100vh;
     padding: 20px;
     color: #ffffff;
+    overflow: auto;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
 }
 
 .container {
@@ -45,6 +51,8 @@ body {
 .content {
     padding: 30px;
     background: #1e1e1e;
+    min-height: calc(100vh - 300px);
+    position: relative;
 }
 
 .actions {

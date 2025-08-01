@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Materia - Aula Virtual</title>
+    <link rel="stylesheet" href="/static/css/crearMateria.css?v=1">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>➕ Crear Nueva Materia</h1>
+            <p>Agrega una nueva materia a tu aula virtual</p>
+        </div>
+        
+        <div class="content">
+            <div id="success-message" class="success-message">
+                ✅ ¡Materia creada exitosamente! Redirigiendo a la lista...
+            </div>
+
+            <div id="loading" class="loading">
+                <h3>Creando materia...</h3>
+                <p>Por favor espera mientras guardamos la información</p>
+            </div>
+
+            <form id="formMateria">
+                <div class="form-group">
+                    <label for="nombre">Nombre de la Materia <span class="required">*</span></label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <div class="error-message" id="nombre-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="codigo">Código <span class="required">*</span></label>
+                    <input type="text" id="codigo" name="codigo" required>
+                    <div class="error-message" id="codigo-error"></div>
+                </div>
+
+                <div class="actions">
+                    <a href="/materias-page" class="btn btn-secondary">
+                        ← Volver a la Lista
+                    </a>
+                    <button type="submit" id="btnCrear" class="btn btn-primary">
+                        💾 Crear Materia
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/crearMateria.js"></script>
+</body>
+</html> 
