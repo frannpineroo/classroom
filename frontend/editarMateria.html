@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Materia - Aula Virtual</title>
+    <link rel="stylesheet" href="/static/css/editarMateria.css?v=1">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🏫 Aula Virtual</h1>
+            <nav class="nav">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="/alumnos-page" class="nav-link">Alumnos</a>
+                <a href="/materias-page" class="nav-link active">Materias</a>
+                <a href="/profesores-page" class="nav-link">Profesores</a>
+                <a href="/materiales-page" class="nav-link">Materiales</a>
+                <a href="/tareas-page" class="nav-link">Tareas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>✏️ Editar Materia</h1>
+                    <p>Modifica la información de la materia</p>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <div id="success-message" class="success-message">
+                    ✅ ¡Materia actualizada exitosamente! Redirigiendo a la lista...
+                </div>
+
+                <div id="loading" class="loading">
+                    <h3>Cargando materia...</h3>
+                    <p>Por favor espera mientras obtenemos la información</p>
+                </div>
+
+                <div id="error" class="error" style="display: none;">
+                    ❌ Error al cargar la materia. Verifica que la URL sea correcta.
+                </div>
+
+                <form id="formMateria">
+                    <div class="form-group">
+                        <label for="nombre">Nombre de la Materia <span class="required">*</span></label>
+                        <input type="text" id="nombre" name="nombre" required>
+                        <div class="error-message" id="nombre-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo">Código <span class="required">*</span></label>
+                        <input type="text" id="codigo" name="codigo" required>
+                        <div class="error-message" id="codigo-error"></div>
+                    </div>
+
+                    <div class="actions">
+                        <a href="/materias-page" class="btn btn-secondary">
+                            ← Volver a la Lista
+                        </a>
+                        <button type="submit" id="btnActualizar" class="btn btn-primary">
+                            💾 Actualizar Materia
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script src="/static/js/editarMateria.js"></script>
+</body>
+</html> 

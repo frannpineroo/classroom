@@ -1,6 +1,6 @@
 @import url('index.css'); /* Imports base styles */
 
-/* Variables específicas para crear alumnos */
+/* Variables específicas para editar materias */
 :root {
     --form-bg: #1e1e1e;
     --input-bg: #2d2d2d;
@@ -28,7 +28,7 @@ body {
     padding: 0;
 }
 
-/* Container override for crear alumnos */
+/* Container override for editar materias */
 .container {
     max-width: 600px;
     overflow: hidden;
@@ -181,6 +181,15 @@ body {
     padding: 20px;
     color: #cccccc;
     display: none;
+}
+
+.error {
+    background: #2d1a1a;
+    color: #ff6b6b;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ff4444;
 }
 
 .required {

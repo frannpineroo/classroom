@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Alumno - Aula Virtual</title>
-    <link rel="stylesheet" href="/static/css/crearAlumnos.css?v=4">
+    <link rel="stylesheet" href="/static/css/crearAlumnos.css?v=7">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>➕ Crear Nuevo Alumno</h1>
-            <p>Agrega un nuevo estudiante a tu aula virtual</p>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🏫 Aula Virtual</h1>
+            <nav class="nav">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="/alumnos-page" class="nav-link active">Alumnos</a>
+                <a href="/materias-page" class="nav-link">Materias</a>
+                <a href="/profesores-page" class="nav-link">Profesores</a>
+                <a href="/materiales-page" class="nav-link">Materiales</a>
+                <a href="/tareas-page" class="nav-link">Tareas</a>
+            </nav>
         </div>
-        
-        <div class="content">
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>➕ Crear Nuevo Alumno</h1>
+                    <p>Agrega un nuevo estudiante a tu aula virtual</p>
+                </div>
+            </section>
+            
+            <section class="content-section">
             <div id="success-message" class="success-message">
                 ✅ ¡Alumno creado exitosamente! Redirigiendo a la lista...
             </div>
@@ -57,8 +74,9 @@
                     </button>
                 </div>
             </form>
+        </section>
         </div>
-    </div>
+    </main>
 
     <script src="/static/js/crearAlumnos.js"></script>
 </body>

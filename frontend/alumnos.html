@@ -4,16 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Alumnos - Aula Virtual</title>
-    <link rel="stylesheet" href="/static/css/alumnos.css?v=3">
+    <link rel="stylesheet" href="/static/css/alumnos.css?v=5">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>📚 Lista de Alumnos</h1>
-            <p>Gestiona los estudiantes de tu aula virtual</p>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🏫 Aula Virtual</h1>
+            <nav class="nav">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="/alumnos-page" class="nav-link active">Alumnos</a>
+                <a href="/materias-page" class="nav-link">Materias</a>
+                <a href="/profesores-page" class="nav-link">Profesores</a>
+                <a href="/materiales-page" class="nav-link">Materiales</a>
+                <a href="/tareas-page" class="nav-link">Tareas</a>
+            </nav>
         </div>
-        
-        <div class="content">
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>📚 Lista de Alumnos</h1>
+                    <p>Gestiona los estudiantes de tu aula virtual</p>
+                </div>
+            </section>
+            
+            <section class="content-section">
             <div class="actions">
                 <button id="cargarAlumnos" class="btn btn-secondary">
                     🔄 Cargar Alumnos
@@ -54,8 +71,9 @@
                     ➕ Crear Primer Alumno
                 </a>
             </div>
+        </section>
         </div>
-    </div>
+    </main>
 
     <script src="/static/js/alumnos.js"></script>
 </body>

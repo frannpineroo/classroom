@@ -217,10 +217,8 @@ async function confirmarEliminar() {
 
 // Función para editar materia
 function editarMateria(id) {
-    const materia = materias.find(m => m.id === id);
-    if (materia) {
-        mostrarModalEditar(materia);
-    }
+    // Redirigir a la página de editar materia con el ID como parámetro
+    window.location.href = `/editar-materia-page?id=${id}`;
 }
 
 // Función para manejar el envío del formulario

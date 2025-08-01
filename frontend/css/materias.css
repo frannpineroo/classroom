@@ -11,6 +11,11 @@
     --danger-border: #ff4444;
 }
 
+/* Container override for materias */
+.container {
+    overflow: hidden;
+}
+
 /* Page header */
 .page-header {
     display: flex;
@@ -46,6 +51,7 @@
     border: 1px solid var(--border-color);
     min-height: calc(100vh - 400px);
     position: relative;
+    overflow: hidden;
 }
 
 /* Filters */

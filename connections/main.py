@@ -57,6 +57,12 @@ def crear_materia_page():
     from fastapi.responses import FileResponse
     return FileResponse("frontend/crearMateria.html")
 
+@app.get("/editar-materia-page")
+def editar_materia_page():
+    """Redirigir a la página de editar materias"""
+    from fastapi.responses import FileResponse
+    return FileResponse("frontend/editarMateria.html")
+
 @app.get("/profesores-page")
 def profesores_page():
     """Redirigir a la página de profesores"""

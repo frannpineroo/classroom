@@ -146,8 +146,8 @@ function verMateria(materiaId) {
 }
 
 function editarMateria(materiaId) {
-    // Por ahora redirigir a la página de materias
-    window.location.href = `/materias-page?edit=${materiaId}`;
+    // Redirigir a la página de editar materia con el ID como parámetro
+    window.location.href = `/editar-materia-page?id=${materiaId}`;
 }
 
 // Función para mostrar notificaciones
