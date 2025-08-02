@@ -32,16 +32,30 @@ function isValidEmail(email) {
 function validateForm() {
     let isValid = true;
     
+    const documento = document.getElementById('documento').value.trim();
+    const nro_doc = document.getElementById('nro_doc').value.trim();
     const nombre = document.getElementById('nombre').value.trim();
     const apellido = document.getElementById('apellido').value.trim();
-    const legajo = document.getElementById('legajo').value.trim();
     const mail = document.getElementById('mail').value.trim();
 
     // Limpiar errores previos
+    clearError('documento');
+    clearError('nro_doc');
     clearError('nombre');
     clearError('apellido');
-    clearError('legajo');
     clearError('mail');
+
+    // Validar tipo de documento
+    if (!documento) {
+        showError('documento', 'El tipo de documento es obligatorio');
+        isValid = false;
+    }
+
+    // Validar número de documento
+    if (!nro_doc) {
+        showError('nro_doc', 'El número de documento es obligatorio');
+        isValid = false;
+    }
 
     // Validar nombre
     if (!nombre) {
@@ -58,12 +72,6 @@ function validateForm() {
         isValid = false;
     } else if (apellido.length < 2) {
         showError('apellido', 'El apellido debe tener al menos 2 caracteres');
-        isValid = false;
-    }
-
-    // Validar legajo
-    if (!legajo) {
-        showError('legajo', 'El legajo es obligatorio');
         isValid = false;
     }
 
@@ -119,10 +127,18 @@ form.addEventListener('submit', async function(e) {
     }
 
     const formData = {
+        documento: document.getElementById('documento').value.trim(),
+        nro_doc: document.getElementById('nro_doc').value.trim(),
         nombre: document.getElementById('nombre').value.trim(),
         apellido: document.getElementById('apellido').value.trim(),
-        legajo: parseInt(document.getElementById('legajo').value.trim()),
-        mail: document.getElementById('mail').value.trim()
+        nacimiento: document.getElementById('nacimiento').value || null,
+        mail: document.getElementById('mail').value.trim(),
+        telefono: document.getElementById('telefono').value || null,
+        direccion: document.getElementById('direccion').value || null,
+        cohorte: document.getElementById('cohorte').value || null,
+        estado: document.getElementById('estado').value || 'Activo',
+        al_dia: document.getElementById('al_dia').checked,
+        carrera_id: document.getElementById('carrera_id').value ? parseInt(document.getElementById('carrera_id').value) : null
     };
 
     // Mostrar loading
@@ -155,8 +171,18 @@ form.addEventListener('submit', async function(e) {
 });
 
 // Limpiar errores cuando el usuario empiece a escribir
-document.querySelectorAll('input').forEach(input => {
+document.querySelectorAll('input, select').forEach(input => {
     input.addEventListener('input', function() {
+        clearError(this.id);
+    });
+    input.addEventListener('change', function() {
+        clearError(this.id);
+    });
+});
+
+// Limpiar errores para checkboxes
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
         clearError(this.id);
     });
 }); 

@@ -37,10 +37,21 @@ async function cargarAlumnos() {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${alumno.id}</td>
+                <td>${alumno.documento} ${alumno.nro_doc}</td>
                 <td>${alumno.nombre}</td>
                 <td>${alumno.apellido}</td>
-                <td>${alumno.legajo}</td>
                 <td>${alumno.mail}</td>
+                <td>${alumno.telefono || '-'}</td>
+                <td>
+                    <span class="estado-badge ${alumno.estado?.toLowerCase() || 'activo'}">
+                        ${alumno.estado || 'Activo'}
+                    </span>
+                </td>
+                <td>
+                    <span class="al-dia-badge ${alumno.al_dia ? 'si' : 'no'}">
+                        ${alumno.al_dia ? 'Sí' : 'No'}
+                    </span>
+                </td>
             `;
             listaAlumnos.appendChild(row);
         });

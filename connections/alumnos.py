@@ -23,17 +23,33 @@ def get_db():
 
 # Esquemas Pydantic
 class AlumnoCreate(BaseModel):
+    documento: str
+    nro_doc: str
     nombre: str
     apellido: str
-    legajo: int
+    nacimiento: str | None = None
     mail: str
+    telefono: str | None = None
+    direccion: str | None = None
+    cohorte: str | None = None
+    estado: str | None = None
+    al_dia: bool = True
+    carrera_id: int | None = None
 
 class AlumnoOut(BaseModel):
     id: int
+    documento: str
+    nro_doc: str
     nombre: str
     apellido: str
-    legajo: int
+    nacimiento: str | None = None
     mail: str
+    telefono: str | None = None
+    direccion: str | None = None
+    cohorte: str | None = None
+    estado: str | None = None
+    al_dia: bool = True
+    carrera_id: int | None = None
     
     model_config = ConfigDict(from_attributes=True)
 
@@ -43,10 +59,10 @@ def crear_alumno(alumno: AlumnoCreate, db: Session = Depends(get_db)):
     try:
         logger.info(f"Intentando crear alumno: {alumno.model_dump()}")
         
-        # Verificar si ya existe un alumno con el mismo legajo
-        existing_legajo = db.query(AlumnoDB).filter(AlumnoDB.legajo == alumno.legajo).first()
-        if existing_legajo:
-            raise HTTPException(status_code=400, detail=f"Ya existe un alumno con el legajo {alumno.legajo}")
+        # Verificar si ya existe un alumno con el mismo número de documento
+        existing_doc = db.query(AlumnoDB).filter(AlumnoDB.nro_doc == alumno.nro_doc).first()
+        if existing_doc:
+            raise HTTPException(status_code=400, detail=f"Ya existe un alumno con el número de documento {alumno.nro_doc}")
         
         # Verificar si ya existe un alumno con el mismo email
         existing_email = db.query(AlumnoDB).filter(AlumnoDB.mail == alumno.mail).first()

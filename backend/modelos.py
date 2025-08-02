@@ -19,10 +19,18 @@ materia_profesor = Table(
 class AlumnoDB(Base):
     __tablename__ = 'alumnos'
     id = Column(Integer, primary_key=True, index=True)
+    documento = Column(String, nullable=False)  # Tipo de documento (DNI, Pasaporte, etc.)
+    nro_doc = Column(String, unique=True, nullable=False)  # Número de documento
     nombre = Column(String, nullable=False)
     apellido = Column(String, nullable=False)
-    legajo = Column(Integer, unique=True, nullable=False)
-    mail = Column(String, unique=True, nullable=False) 
+    nacimiento = Column(String, nullable=True)  # Fecha de nacimiento
+    mail = Column(String, unique=True, nullable=False)
+    telefono = Column(String, nullable=True)
+    direccion = Column(String, nullable=True)
+    cohorte = Column(String, nullable=True)  # Año de ingreso o cohorte
+    estado = Column(String, nullable=True)  # Estado del alumno (Activo, Inactivo, etc.)
+    al_dia = Column(Boolean, default=True)  # Si está al día con los pagos
+    carrera_id = Column(Integer, nullable=True)  # ID de la carrera (puede ser ForeignKey en el futuro)
     materias = relationship('MateriaDB', secondary=materia_alumno, back_populates='alumnos')
 
 class MateriaDB(Base):
