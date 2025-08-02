@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Materias - Aula Virtual</title>
-    <link rel="stylesheet" href="/static/css/materias.css?v=6">
+    <title>Lista de Profesores - Aula Virtual</title>
+    <link rel="stylesheet" href="/static/css/profesores.css?v=1">
 </head>
 <body>
     <header class="header">
@@ -13,8 +13,8 @@
             <nav class="nav">
                 <a href="/" class="nav-link">Inicio</a>
                 <a href="/alumnos-page" class="nav-link">Alumnos</a>
-                <a href="/materias-page" class="nav-link active">Materias</a>
-                <a href="/profesores-page" class="nav-link">Profesores</a>
+                <a href="/materias-page" class="nav-link">Materias</a>
+                <a href="/profesores-page" class="nav-link active">Profesores</a>
                 <a href="/materiales-page" class="nav-link">Materiales</a>
                 <a href="/tareas-page" class="nav-link">Tareas</a>
             </nav>
@@ -25,41 +25,47 @@
         <div class="container">
             <section class="page-header">
                 <div class="header-content">
-                    <h1>Gestión de Materias</h1>
-                    <p>Administra las materias del aula virtual</p>
+                    <h1>Lista de Profesores</h1>
+                    <p>Gestiona los profesores de tu aula virtual</p>
                 </div>
-                                 <button class="btn btn-primary" onclick="window.location.href='/crear-materia-page'">
-                     <span>+</span> Nueva Materia
-                 </button>
             </section>
-
+            
             <section class="content-section">
-                <div class="filters">
-                    <input type="text" id="search-input" placeholder="Buscar materias..." class="search-input">
+                <div class="actions">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Buscar profesores..." class="search-input">
+                    </div>
+                    <button class="btn btn-primary" onclick="mostrarModalCrear()">
+                        <span>+</span> Nuevo Profesor
+                    </button>
                 </div>
 
-                <div id="materias-container" class="materias-container">
-                    <!-- Las materias se cargarán dinámicamente aquí -->
+                <div id="profesores-container">
+                    <!-- Los profesores se cargarán aquí dinámicamente -->
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Modal para crear/editar materia -->
-    <div id="materia-modal" class="modal">
+    <!-- Modal para crear/editar profesor -->
+    <div id="profesor-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-title">Nueva Materia</h2>
+                <h2 id="modal-title">Nuevo Profesor</h2>
                 <button class="close-btn" onclick="cerrarModal()">&times;</button>
             </div>
-            <form id="materia-form" class="modal-form">
+            <form id="profesor-form">
                 <div class="form-group">
-                    <label for="nombre">Nombre de la Materia</label>
+                    <label for="nombre">Nombre <span class="required">*</span></label>
                     <input type="text" id="nombre" name="nombre" required>
                 </div>
                 <div class="form-group">
-                    <label for="codigo">Código</label>
-                    <input type="text" id="codigo" name="codigo" required>
+                    <label for="apellido">Apellido <span class="required">*</span></label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="legajo">Legajo <span class="required">*</span></label>
+                    <input type="number" id="legajo" name="legajo" required>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
@@ -77,16 +83,16 @@
                 <button class="close-btn" onclick="cerrarConfirmModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <p>¿Estás seguro de que quieres eliminar esta materia?</p>
-                <p><strong id="materia-eliminar-nombre"></strong></p>
+                <p>¿Estás seguro de que quieres eliminar al profesor <strong id="profesor-eliminar-nombre"></strong>?</p>
+                <p class="warning">Esta acción no se puede deshacer.</p>
             </div>
-            <div class="modal-actions">
+            <div class="form-actions">
                 <button class="btn btn-secondary" onclick="cerrarConfirmModal()">Cancelar</button>
                 <button class="btn btn-danger" onclick="confirmarEliminar()">Eliminar</button>
             </div>
         </div>
     </div>
 
-    <script src="/static/js/materias.js"></script>
+    <script src="/static/js/profesores.js"></script>
 </body>
 </html> 
