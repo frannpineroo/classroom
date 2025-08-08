@@ -16,10 +16,26 @@ materia_profesor = Table(
     Column('profesor_id', Integer, ForeignKey('profesores.id'), primary_key=True)
 )
 
+class UsuarioDB(Base):
+    __tablename__ = 'usuarios'
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, nullable=False)
+    email = Column(String, unique=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    fecha_creacion = Column(String, nullable=True)  # Cambiado a nullable=True
+    rol = Column(String, nullable=True)  # Cambiado a nullable=True
+    estado = Column(String, nullable=True)  # Cambiado a nullable=True
+    imagen_perfil = Column(String, nullable=True)
+    telefono = Column(String, nullable=True)
+    login_fallidos = Column(Integer, nullable=True, default=0)  # Cambiado a nullable=True
+    is_active = Column(Boolean, default=True)
+    is_superuser = Column(Boolean, default=False)
+    profesores = relationship('ProfesorDB', back_populates='usuario')
+
 class AlumnoDB(Base):
     __tablename__ = 'alumnos'
     id = Column(Integer, primary_key=True, index=True)
-    documento = Column(String, nullable=False)  # Tipo de documento (DNI, Pasaporte, etc.)
+    documento = Column(String, nullable=True)  # Cambiado a nullable=True
     nro_doc = Column(String, unique=True, nullable=False)  # Número de documento
     nombre = Column(String, nullable=False)
     apellido = Column(String, nullable=False)
@@ -38,17 +54,17 @@ class MateriaDB(Base):
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, nullable=False)
     codigo = Column(String, unique=True, nullable=False)
-    anio_perteneciente = Column(Integer, nullable=False)
-    cant_dias = Column(Integer, nullable=False)
+    anio_perteneciente = Column(Integer, nullable=True)  # Cambiado a nullable=True
+    cant_dias = Column(Integer, nullable=True)  # Cambiado a nullable=True
     descripcion = Column(String, nullable=True)
-    creditos = Column(Integer, nullable=False)
-    duracion = Column(Integer, nullable=False)
-    modalidad = Column(String, nullable=False)
+    creditos = Column(Integer, nullable=True)  # Cambiado a nullable=True
+    duracion = Column(Integer, nullable=True)  # Cambiado a nullable=True
+    modalidad = Column(String, nullable=True)  # Cambiado a nullable=True
     profesor_responsable = Column(String, nullable=True)
     horario = Column(String, nullable=True)
     materia_previa_id = Column(Integer, ForeignKey('materias.id'), nullable=True)
-    estado = Column(String, nullable=False)
-    carga_horaria = Column(Integer, nullable=False)
+    estado = Column(String, nullable=True)  # Cambiado a nullable=True
+    carga_horaria = Column(Integer, nullable=True)  # Cambiado a nullable=True
     observaciones = Column(String, nullable=True)
     alumnos = relationship('AlumnoDB', secondary=materia_alumno, back_populates='materias')
     profesores = relationship('ProfesorDB', secondary=materia_profesor, back_populates='materias')
@@ -56,18 +72,18 @@ class MateriaDB(Base):
 class ProfesorDB(Base):
     __tablename__ = 'profesores'
     id = Column(Integer, primary_key=True, index=True)
-    documento = Column(String, nullable=False)
-    nro_doc = Column(String, unique=True, nullable=False)
+    documento = Column(String, nullable=True)  # Cambiado a nullable=True
+    nro_doc = Column(String, unique=True, nullable=True)
     nombre = Column(String, nullable=False)
     apellido = Column(String, nullable=False)
     titulo_universitario = Column(String, nullable=True)
     especialidad = Column(String, nullable=True)
     fecha_alta = Column(String, nullable=True)
-    mail = Column(String, unique=True, nullable=False)
+    mail = Column(String, unique=True, nullable=True)
     telefono = Column(String, nullable=True)
-    estado = Column(String, nullable=False)
-    mat_asignadas = Column(Integer, nullable=False)
-    usuario_id = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
+    estado = Column(String, nullable=True)  # Cambiado a nullable=True
+    mat_asignadas = Column(Integer, nullable=True, default=0)  # Cambiado a nullable=True
+    usuario_id = Column(Integer, ForeignKey('usuarios.id'), nullable=True)  # Cambiado a nullable=True
     materias = relationship('MateriaDB', secondary=materia_profesor, back_populates='profesores')
     usuario = relationship('UsuarioDB', back_populates='profesores')
 
@@ -76,13 +92,13 @@ class MaterialDB(Base):
     id = Column(Integer, primary_key=True, index=True)
     titulo = Column(String, nullable=False)
     descripcion = Column(String, nullable=True)
-    tipo = Column(String, nullable=False)
-    archivo = Column(String, nullable=False)  # Ruta o nombre del archivo
-    fecha_subida = Column(String, nullable=False)
-    profesor_id = Column(Integer, ForeignKey('profesores.id'), nullable=False)
-    materia_id = Column(Integer, ForeignKey('materias.id'), nullable=False)
-    tamanio = Column(Integer, nullable=False)
-    estado = Column(String, nullable=False)
+    tipo = Column(String, nullable=True)  # Cambiado a nullable=True
+    archivo = Column(String, nullable=True)  # Cambiado a nullable=True
+    fecha_subida = Column(String, nullable=True)  # Cambiado a nullable=True
+    profesor_id = Column(Integer, ForeignKey('profesores.id'), nullable=True)  # Cambiado a nullable=True
+    materia_id = Column(Integer, ForeignKey('materias.id'), nullable=True)  # Cambiado a nullable=True
+    tamanio = Column(Integer, nullable=True)  # Cambiado a nullable=True
+    estado = Column(String, nullable=True)  # Cambiado a nullable=True
     profesor = relationship('ProfesorDB', backref='materiales')
     materia = relationship('MateriaDB', backref='materiales')
 
@@ -91,13 +107,13 @@ class TareaDB(Base):
     id = Column(Integer, primary_key=True, index=True)
     titulo = Column(String, nullable=False)
     descripcion = Column(String, nullable=True)
-    fecha_entrega = Column(String, nullable=False)
-    fecha_publicacion = Column(String, nullable=False)
-    materia_id = Column(Integer, ForeignKey('materias.id'), nullable=False)
-    profesor_id = Column(Integer, ForeignKey('profesores.id'), nullable=False)
-    tipo = Column(String, nullable=False)
-    puntaje = Column(Integer, nullable=False)
-    estado = Column(String, nullable=False)
+    fecha_entrega = Column(String, nullable=True)  # Cambiado a nullable=True
+    fecha_publicacion = Column(String, nullable=True)  # Cambiado a nullable=True
+    materia_id = Column(Integer, ForeignKey('materias.id'), nullable=True)  # Cambiado a nullable=True
+    profesor_id = Column(Integer, ForeignKey('profesores.id'), nullable=True)  # Cambiado a nullable=True
+    tipo = Column(String, nullable=True)  # Cambiado a nullable=True
+    puntaje = Column(Integer, nullable=True)  # Cambiado a nullable=True
+    estado = Column(String, nullable=True)  # Cambiado a nullable=True
     materia = relationship('MateriaDB', backref='tareas')
 
  
