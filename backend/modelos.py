@@ -91,7 +91,13 @@ class TareaDB(Base):
     id = Column(Integer, primary_key=True, index=True)
     titulo = Column(String, nullable=False)
     descripcion = Column(String, nullable=True)
+    fecha_entrega = Column(String, nullable=False)
+    fecha_publicacion = Column(String, nullable=False)
     materia_id = Column(Integer, ForeignKey('materias.id'), nullable=False)
-    apartado = Column(String, nullable=True)  # Ruta o nombre del archivo entregado
-    entregada = Column(Boolean, default=False)
-    materia = relationship('MateriaDB', backref='tareas') 
+    profesor_id = Column(Integer, ForeignKey('profesores.id'), nullable=False)
+    tipo = Column(String, nullable=False)
+    puntaje = Column(Integer, nullable=False)
+    estado = Column(String, nullable=False)
+    materia = relationship('MateriaDB', backref='tareas')
+
+ 
