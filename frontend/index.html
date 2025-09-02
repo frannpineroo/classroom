@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aula Virtual - Dashboard</title>
-    <link rel="stylesheet" href="/static/css/index.css?v=4">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <h1 class="logo">Aula Virtual</h1>
             <nav class="nav">
-                <a href="/alumnos-page" class="nav-link">Alumnos</a>
-                <a href="/materias-page" class="nav-link">Materias</a>
-                <a href="/profesores-page" class="nav-link">Profesores</a>
-                <a href="/materiales-page" class="nav-link">Materiales</a>
-                <a href="/tareas-page" class="nav-link">Tareas</a>
+                <a href="alumnos.html" class="nav-link">Alumnos</a>
+                <a href="materias.html" class="nav-link">Materias</a>
+                <a href="profesores.html" class="nav-link">Profesores</a>
+                <a href="materiales.html" class="nav-link">Materiales</a>
+                <a href="tareas.html" class="nav-link">Tareas</a>
             </nav>
         </div>
     </header>
@@ -51,7 +51,7 @@
             <section class="materias-section">
                 <div class="section-header">
                     <h2>Materias</h2>
-                    <button class="btn btn-primary" onclick="window.location.href='/materias-page'">
+                    <button class="btn btn-primary" onclick="window.location.href='materias.html'">
                         Ver todas las materias
                     </button>
                 </div>
@@ -63,22 +63,22 @@
             <section class="quick-actions">
                 <h2>Acciones Rápidas</h2>
                 <div class="actions-grid">
-                    <div class="action-card" onclick="window.location.href='/crear-alumnos-page'">
+                    <div class="action-card" href="crearAlumnos.html">
                         <div class="action-icon">👨‍🎓</div>
                         <h3>Crear Alumno</h3>
                         <p>Agregar un nuevo alumno al sistema</p>
                     </div>
-                                         <div class="action-card" onclick="window.location.href='/crear-materia-page'">
+                                         <div class="action-card" href="crearMaterias.html">
                          <div class="action-icon">📚</div>
                          <h3>Crear Materia</h3>
                          <p>Agregar una nueva materia</p>
                      </div>
-                    <div class="action-card" onclick="window.location.href='/profesores-page'">
+                    <div class="action-card" href="profesores.html">
                         <div class="action-icon">👨‍🏫</div>
                         <h3>Crear Profesor</h3>
                         <p>Agregar un nuevo profesor</p>
                     </div>
-                    <div class="action-card" onclick="window.location.href='/tareas-page'">
+                    <div class="action-card" href="tareas.html">
                         <div class="action-icon">📝</div>
                         <h3>Crear Tarea</h3>
                         <p>Asignar una nueva tarea</p>
@@ -94,6 +94,6 @@
         </div>
     </footer>
 
-    <script src="/static/js/index.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html> 

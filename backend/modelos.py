@@ -76,6 +76,7 @@ class ProfesorDB(Base):
     nro_doc = Column(String, unique=True, nullable=True)
     nombre = Column(String, nullable=False)
     apellido = Column(String, nullable=False)
+    legajo = Column(Integer, unique=True, nullable=True)  # Agregado campo legajo
     titulo_universitario = Column(String, nullable=True)
     especialidad = Column(String, nullable=True)
     fecha_alta = Column(String, nullable=True)

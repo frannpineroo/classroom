@@ -24,13 +24,13 @@ def get_db():
 class ProfesorCreate(BaseModel):
     nombre: str
     apellido: str
-    legajo: int
+    legajo: int | None = None
 
 class ProfesorOut(BaseModel):
     id: int
     nombre: str
     apellido: str
-    legajo: int
+    legajo: int | None = None
     
     model_config = ConfigDict(from_attributes=True)
 
