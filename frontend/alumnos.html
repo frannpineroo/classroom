@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Alumnos - Aula Virtual</title>
-    <link rel="stylesheet" href="/static/css/alumnos.css?v=5">
+    <link rel="stylesheet" href="css/alumnos.css">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <h1 class="logo">Aula Virtual</h1>
             <nav class="nav">
-                <a href="/" class="nav-link">Inicio</a>
-                <a href="/alumnos-page" class="nav-link active">Alumnos</a>
-                <a href="/materias-page" class="nav-link">Materias</a>
-                <a href="/profesores-page" class="nav-link">Profesores</a>
-                <a href="/materiales-page" class="nav-link">Materiales</a>
-                <a href="/tareas-page" class="nav-link">Tareas</a>
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="alumnos.html" class="nav-link">Alumnos</a>
+                <a href="materias.html" class="nav-link active">Materias</a>
+                <a href="profesores.html" class="nav-link">Profesores</a>
+                <a href="materiales.html" class="nav-link">Materiales</a>
+                <a href="tareas.html" class="nav-link">Tareas</a>
             </nav>
         </div>
     </header>
@@ -35,7 +35,7 @@
                 <button id="cargarAlumnos" class="btn btn-secondary">
                     Cargar Alumnos
                 </button>
-                <a href="/crear-alumnos-page" class="btn btn-primary">
+                <a href="crearAlumnos.html" class="btn btn-primary">
                     Crear Nuevo Alumno
                 </a>
             </div>
@@ -70,7 +70,7 @@
             <div id="empty-state" class="empty-state" style="display: none;">
                 <h3>No hay alumnos registrados</h3>
                 <p>Comienza agregando el primer alumno a tu aula virtual</p>
-                <a href="/crear-alumnos-page" class="btn btn-primary" style="margin-top: 15px;">
+                <a href="crearAlumnos.html" class="btn btn-primary" style="margin-top: 15px;">
                     Crear Primer Alumno
                 </a>
             </div>
@@ -78,6 +78,6 @@
         </div>
     </main>
 
-    <script src="/static/js/alumnos.js"></script>
+    <script src="js/alumnos.js"></script>
 </body>
 </html>

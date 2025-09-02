@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Materia - Aula Virtual</title>
-    <link rel="stylesheet" href="/static/css/crearMateria.css?v=2">
+    <link rel="stylesheet" href="css/crearMateria.css">
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Aula Virtual</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="alumnos.html" class="nav-link active">Alumnos</a>
+                <a href="materias.html" class="nav-link">Materias</a>
+                <a href="profesores.html" class="nav-link">Profesores</a>
+                <a href="materiales.html" class="nav-link">Materiales</a>
+                <a href="tareas.html" class="nav-link">Tareas</a>
+            </nav>
+        </div>
+    </header>
+    
     <div class="container">
         <div class="header">
             <h1>Crear Nueva Materia</h1>
@@ -37,7 +51,7 @@
                 </div>
 
                 <div class="actions">
-                    <a href="/materias-page" class="btn btn-secondary">
+                    <a href="materias.html" class="btn btn-secondary">
                         ← Volver a la Lista
                     </a>
                     <button type="submit" id="btnCrear" class="btn btn-primary">
@@ -48,6 +62,6 @@
         </div>
     </div>
 
-    <script src="/static/js/crearMateria.js"></script>
+    <script src="js/crearMateria.js"></script>
 </body>
 </html> 
