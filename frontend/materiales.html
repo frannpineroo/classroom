@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Materiales - Aula Virtual</title>
+    <link rel="stylesheet" href="css/materiales.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Aula Virtual</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="alumnos.html" class="nav-link">Alumnos</a>
+                <a href="materias.html" class="nav-link">Materias</a>
+                <a href="profesores.html" class="nav-link">Profesores</a>
+                <a href="materiales.html" class="nav-link active">Materiales</a>
+                <a href="tareas.html" class="nav-link">Tareas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>Lista de Materiales</h1>
+                    <p>Gestiona los materiales de tu aula virtual</p>
+                </div>
+            </section>
+            
+            <section class="content-section">
+            <div class="actions">
+                <button id="cargarMateriales" class="btn btn-secondary">
+                    Cargar Materiales
+                </button>
+                <a href="crearMaterial.html" class="btn btn-primary">
+                    Crear Nuevo Material
+                </a>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <h3>Cargando materiales...</h3>
+                <p>Por favor espera mientras obtenemos la información</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <div class="table-container">
+                <table id="tablaMateriales" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Archivo</th>
+                            <th>Fecha Subida</th>
+                            <th>Profesor</th>
+                            <th>Materia</th>
+                            <th>Tamaño</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaMateriales">
+                        <!-- Los materiales se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>No hay materiales registrados</h3>
+                <p>Comienza agregando el primer material a tu aula virtual</p>
+                <a href="crearMateriales.html" class="btn btn-primary" style="margin-top: 15px;">
+                    Crear Primer Material
+                </a>
+            </div>
+        </section>
+        </div>
+    </main>
+
+    <script src="js/materiales.js"></script>
+</body>
+</html>
