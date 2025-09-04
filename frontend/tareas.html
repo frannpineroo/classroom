@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas - Aula Virtual</title>
+    <link rel="stylesheet" href="css/tareas.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Aula Virtual</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="alumnos.html" class="nav-link">Alumnos</a>
+                <a href="materias.html" class="nav-link">Materias</a>
+                <a href="profesores.html" class="nav-link">Profesores</a>
+                <a href="materiales.html" class="nav-link">Materiales</a>
+                <a href="tareas.html" class="nav-link active">Tareas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>Lista de Tareas</h1>
+                    <p>Gestiona las tareas de tu aula virtual</p>
+                </div>
+            </section>
+            
+            <section class="content-section">
+            <div class="actions">
+                <button id="cargarTareas" class="btn btn-secondary">
+                    Cargar Tareas
+                </button>
+                <a href="crearTarea.html" class="btn btn-primary">
+                    Crear Nueva Tarea
+                </a>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <h3>Cargando tareas...</h3>
+                <p>Por favor espera mientras obtenemos la información</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <div class="table-container">
+                <table id="tablaTareas" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Fecha Publicación</th>
+                            <th>Fecha Entrega</th>
+                            <th>Profesor</th>
+                            <th>Materia</th>
+                            <th>Puntaje</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaTareas">
+                        <!-- Las tareas se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>No hay tareas registradas</h3>
+                <p>Comienza agregando la primera tarea a tu aula virtual</p>
+                <a href="crearTarea.html" class="btn btn-primary" style="margin-top: 15px;">
+                    Crear Primera Tarea
+                </a>
+            </div>
+        </section>
+        </div>
+    </main>
+
+    <script src="js/tareas.js"></script>
+</body>
+</html>

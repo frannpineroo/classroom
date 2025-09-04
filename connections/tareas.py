@@ -24,17 +24,25 @@ def get_db():
 class TareaCreate(BaseModel):
     titulo: str
     descripcion: str = None
-    materia_id: int
-    apartado: str = None
-    entregada: bool = False
+    fecha_entrega: str = None
+    fecha_publicacion: str = None
+    materia_id: int = None
+    profesor_id: int = None
+    tipo: str = None
+    puntaje: int = None
+    estado: str = None
 
 class TareaOut(BaseModel):
     id: int
     titulo: str
     descripcion: str = None
-    materia_id: int
-    apartado: str = None
-    entregada: bool
+    fecha_entrega: str = None
+    fecha_publicacion: str = None
+    materia_id: int = None
+    profesor_id: int = None
+    tipo: str = None
+    puntaje: int = None
+    estado: str = None
     
     model_config = ConfigDict(from_attributes=True)
 

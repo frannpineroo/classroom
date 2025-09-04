@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Tarea - Aula Virtual</title>
+    <link rel="stylesheet" href="css/crearTarea.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Aula Virtual</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="alumnos.html" class="nav-link">Alumnos</a>
+                <a href="materias.html" class="nav-link">Materias</a>
+                <a href="profesores.html" class="nav-link">Profesores</a>
+                <a href="materiales.html" class="nav-link">Materiales</a>
+                <a href="tareas.html" class="nav-link active">Tareas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>Crear Nueva Tarea</h1>
+                    <p>Agrega una nueva tarea a tu aula virtual</p>
+                </div>
+            </section>
+            
+            <section class="content-section">
+            <div id="success-message" class="success-message">
+                ¡Tarea creada exitosamente! Redirigiendo a la lista...
+            </div>
+
+            <div id="loading" class="loading">
+                <h3>Creando tarea...</h3>
+                <p>Por favor espera mientras guardamos la información</p>
+            </div>
+
+            <form id="formTarea">
+                <div class="form-group">
+                    <label for="titulo">Título <span class="required">*</span></label>
+                    <input type="text" id="titulo" name="titulo" required placeholder="Ej: Ejercicio de Matemáticas - Capítulo 3">
+                    <div class="error-message" id="titulo-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe los objetivos y requisitos de la tarea..."></textarea>
+                    <div class="error-message" id="descripcion-error"></div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tipo">Tipo de Tarea</label>
+                        <select id="tipo" name="tipo">
+                            <option value="">Seleccionar...</option>
+                            <option value="ejercicio">Ejercicio</option>
+                            <option value="proyecto">Proyecto</option>
+                            <option value="examen">Examen</option>
+                            <option value="practica">Práctica</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                        <div class="error-message" id="tipo-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select id="estado" name="estado">
+                            <option value="Activa">Activa</option>
+                            <option value="Inactiva">Inactiva</option>
+                            <option value="Entregada">Entregada</option>
+                            <option value="Vencida">Vencida</option>
+                            <option value="Calificada">Calificada</option>
+                        </select>
+                        <div class="error-message" id="estado-error"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fecha_publicacion">Fecha de Publicación</label>
+                        <input type="date" id="fecha_publicacion" name="fecha_publicacion">
+                        <div class="error-message" id="fecha_publicacion-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_entrega">Fecha de Entrega <span class="required">*</span></label>
+                        <input type="date" id="fecha_entrega" name="fecha_entrega" required>
+                        <div class="error-message" id="fecha_entrega-error"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="profesor_id">ID del Profesor</label>
+                        <input type="number" id="profesor_id" name="profesor_id" placeholder="Ej: 1">
+                        <div class="error-message" id="profesor_id-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="materia_id">ID de la Materia</label>
+                        <input type="number" id="materia_id" name="materia_id" placeholder="Ej: 1">
+                        <div class="error-message" id="materia_id-error"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="puntaje">Puntaje Total</label>
+                    <input type="number" id="puntaje" name="puntaje" placeholder="Ej: 100" min="0">
+                    <div class="error-message" id="puntaje-error"></div>
+                </div>
+
+                <div class="actions">
+                    <a href="tareas.html" class="btn btn-secondary">
+                        ← Volver a la Lista
+                    </a>
+                    <button type="submit" id="btnCrear" class="btn btn-primary">
+                        Crear Tarea
+                    </button>
+                </div>
+            </form>
+        </section>
+        </div>
+    </main>
+
+    <script src="js/crearTarea.js"></script>
+</body>
+</html>
