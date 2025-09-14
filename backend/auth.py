@@ -1,4 +1,5 @@
 from datetime import timedelta, datetime
+import email
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
@@ -29,6 +30,7 @@ oauth2_bearer = OAuth2PasswordBearer(tokenUrl="auth/token")
 class CreateUserRequest(BaseModel):
     username: str
     password: str
+    email: str
 
 class Token(BaseModel):
     access_token: str
@@ -47,6 +49,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 async def create_user(db: db_dependency, create_user_request: CreateUserRequest):
     create_user_model = UsuarioDB(
         username=create_user_request.username,
+        email=create_user_request.email,
         hashed_password=bcrypt_context.hash(create_user_request.password),
     )
     db.add(create_user_model)

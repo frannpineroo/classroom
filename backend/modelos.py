@@ -18,7 +18,7 @@ materia_profesor = Table(
 
 class UsuarioDB(Base):
     __tablename__ = 'usuarios'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     username = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)
     hashed_password = Column(String, nullable=False)
