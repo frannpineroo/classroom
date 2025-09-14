@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException, Depends
-from sqlalchemy.orm import Session
-from backend.db import SessionLocal
+from fastapi import APIRouter, HTTPException
 from backend.modelos import TareaDB
+from backend.db import db_dependency
 from pydantic import BaseModel, ConfigDict
 from typing import List
 import logging
@@ -11,14 +10,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/tareas", tags=["tareas"])
-
-# Dependencia para obtener la sesión de base de datos
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 # Esquemas Pydantic
 class TareaCreate(BaseModel):
@@ -48,7 +39,7 @@ class TareaOut(BaseModel):
 
 # Crear Tarea
 @router.post("/", response_model=TareaOut)
-def crear_tarea(tarea: TareaCreate, db: Session = Depends(get_db)):
+def crear_tarea(tarea: TareaCreate, db: db_dependency):
     try:
         logger.info(f"Intentando crear tarea: {tarea.model_dump()}")
         
@@ -67,7 +58,7 @@ def crear_tarea(tarea: TareaCreate, db: Session = Depends(get_db)):
 
 # Listar Tareas
 @router.get("/", response_model=List[TareaOut])
-def listar_tareas(db: Session = Depends(get_db)):
+def listar_tareas(db: db_dependency):
     try:
         tareas = db.query(TareaDB).all()
         logger.info(f"Listando {len(tareas)} tareas")
@@ -78,7 +69,7 @@ def listar_tareas(db: Session = Depends(get_db)):
 
 # Listar Tareas por Materia
 @router.get("/materia/{materia_id}", response_model=List[TareaOut])
-def listar_tareas_por_materia(materia_id: int, db: Session = Depends(get_db)):
+def listar_tareas_por_materia(materia_id: int, db: db_dependency):
     try:
         tareas = db.query(TareaDB).filter(TareaDB.materia_id == materia_id).all()
         logger.info(f"Listando {len(tareas)} tareas para la materia {materia_id}")
@@ -89,7 +80,7 @@ def listar_tareas_por_materia(materia_id: int, db: Session = Depends(get_db)):
 
 # Obtener Tarea por ID
 @router.get("/{tarea_id}", response_model=TareaOut)
-def obtener_tarea(tarea_id: int, db: Session = Depends(get_db)):
+def obtener_tarea(tarea_id: int, db: db_dependency):
     try:
         tarea = db.query(TareaDB).filter(TareaDB.id == tarea_id).first()
         if not tarea:
@@ -103,7 +94,7 @@ def obtener_tarea(tarea_id: int, db: Session = Depends(get_db)):
 
 # Actualizar Tarea
 @router.put("/{tarea_id}", response_model=TareaOut)
-def actualizar_tarea(tarea_id: int, datos: TareaCreate, db: Session = Depends(get_db)):
+def actualizar_tarea(tarea_id: int, datos: TareaCreate, db: db_dependency):
     try:
         tarea = db.query(TareaDB).filter(TareaDB.id == tarea_id).first()
         if not tarea:
@@ -124,7 +115,7 @@ def actualizar_tarea(tarea_id: int, datos: TareaCreate, db: Session = Depends(ge
 
 # Marcar Tarea como Entregada
 @router.patch("/{tarea_id}/entregar")
-def marcar_tarea_entregada(tarea_id: int, db: Session = Depends(get_db)):
+def marcar_tarea_entregada(tarea_id: int, db: db_dependency):
     try:
         tarea = db.query(TareaDB).filter(TareaDB.id == tarea_id).first()
         if not tarea:
@@ -143,7 +134,7 @@ def marcar_tarea_entregada(tarea_id: int, db: Session = Depends(get_db)):
 
 # Eliminar Tarea
 @router.delete("/{tarea_id}")
-def eliminar_tarea(tarea_id: int, db: Session = Depends(get_db)):
+def eliminar_tarea(tarea_id: int, db: db_dependency):
     try:
         tarea = db.query(TareaDB).filter(TareaDB.id == tarea_id).first()
         if not tarea:

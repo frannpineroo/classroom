@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException, Depends
-from sqlalchemy.orm import Session
-from backend.db import SessionLocal
+from fastapi import APIRouter, HTTPException
 from backend.modelos import ProfesorDB
+from backend.db import db_dependency
 from pydantic import BaseModel, ConfigDict
 from typing import List
 import logging
@@ -11,14 +10,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/profesores", tags=["profesores"])
-
-# Dependencia para obtener la sesión de base de datos
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 # Esquemas Pydantic
 class ProfesorCreate(BaseModel):
@@ -36,7 +27,7 @@ class ProfesorOut(BaseModel):
 
 # Crear Profesor
 @router.post("/", response_model=ProfesorOut)
-def crear_profesor(profesor: ProfesorCreate, db: Session = Depends(get_db)):
+def crear_profesor(profesor: ProfesorCreate, db: db_dependency):
     try:
         logger.info(f"Intentando crear profesor: {profesor.model_dump()}")
         
@@ -62,7 +53,7 @@ def crear_profesor(profesor: ProfesorCreate, db: Session = Depends(get_db)):
 
 # Listar Profesores
 @router.get("/", response_model=List[ProfesorOut])
-def listar_profesores(db: Session = Depends(get_db)):
+def listar_profesores(db: db_dependency):
     try:
         profesores = db.query(ProfesorDB).all()
         logger.info(f"Listando {len(profesores)} profesores")
@@ -73,7 +64,7 @@ def listar_profesores(db: Session = Depends(get_db)):
 
 # Obtener Profesor por ID
 @router.get("/{profesor_id}", response_model=ProfesorOut)
-def obtener_profesor(profesor_id: int, db: Session = Depends(get_db)):
+def obtener_profesor(profesor_id: int, db: db_dependency):
     try:
         profesor = db.query(ProfesorDB).filter(ProfesorDB.id == profesor_id).first()
         if not profesor:
@@ -87,7 +78,7 @@ def obtener_profesor(profesor_id: int, db: Session = Depends(get_db)):
 
 # Actualizar Profesor
 @router.put("/{profesor_id}", response_model=ProfesorOut)
-def actualizar_profesor(profesor_id: int, datos: ProfesorCreate, db: Session = Depends(get_db)):
+def actualizar_profesor(profesor_id: int, datos: ProfesorCreate, db: db_dependency):
     try:
         profesor = db.query(ProfesorDB).filter(ProfesorDB.id == profesor_id).first()
         if not profesor:
@@ -108,7 +99,7 @@ def actualizar_profesor(profesor_id: int, datos: ProfesorCreate, db: Session = D
 
 # Eliminar Profesor
 @router.delete("/{profesor_id}")
-def eliminar_profesor(profesor_id: int, db: Session = Depends(get_db)):
+def eliminar_profesor(profesor_id: int, db: db_dependency):
     try:
         profesor = db.query(ProfesorDB).filter(ProfesorDB.id == profesor_id).first()
         if not profesor:

@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException, Depends
-from sqlalchemy.orm import Session
-from backend.db import SessionLocal
+from fastapi import APIRouter, HTTPException
 from backend.modelos import MaterialDB
+from backend.db import db_dependency 
 from pydantic import BaseModel, ConfigDict
 from typing import List
 import logging
@@ -12,15 +11,6 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/materiales", tags=["materiales"])
 
-# Dependencia para obtener la sesión de base de datos
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-# Esquemas Pydantic
 class MaterialCreate(BaseModel):
     titulo: str
     descripcion: str = None
@@ -36,7 +26,7 @@ class MaterialOut(BaseModel):
 
 # Crear Material
 @router.post("/", response_model=MaterialOut)
-def crear_material(material: MaterialCreate, db: Session = Depends(get_db)):
+def crear_material(material: MaterialCreate, db: db_dependency):
     try:
         logger.info(f"Intentando crear material: {material.model_dump()}")
         
@@ -48,6 +38,8 @@ def crear_material(material: MaterialCreate, db: Session = Depends(get_db)):
         logger.info(f"Material creado exitosamente con ID: {db_material.id}")
         return db_material
         
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error al crear material: {str(e)}")
         db.rollback()
@@ -55,7 +47,7 @@ def crear_material(material: MaterialCreate, db: Session = Depends(get_db)):
 
 # Listar Materiales
 @router.get("/", response_model=List[MaterialOut])
-def listar_materiales(db: Session = Depends(get_db)):
+def listar_materiales(db: db_dependency):
     try:
         materiales = db.query(MaterialDB).all()
         logger.info(f"Listando {len(materiales)} materiales")
@@ -66,7 +58,7 @@ def listar_materiales(db: Session = Depends(get_db)):
 
 # Obtener Material por ID
 @router.get("/{material_id}", response_model=MaterialOut)
-def obtener_material(material_id: int, db: Session = Depends(get_db)):
+def obtener_material(material_id: int, db: db_dependency):
     try:
         material = db.query(MaterialDB).filter(MaterialDB.id == material_id).first()
         if not material:
@@ -80,7 +72,7 @@ def obtener_material(material_id: int, db: Session = Depends(get_db)):
 
 # Actualizar Material
 @router.put("/{material_id}", response_model=MaterialOut)
-def actualizar_material(material_id: int, datos: MaterialCreate, db: Session = Depends(get_db)):
+def actualizar_material(material_id: int, datos: MaterialCreate, db: db_dependency):
     try:
         material = db.query(MaterialDB).filter(MaterialDB.id == material_id).first()
         if not material:
@@ -101,7 +93,7 @@ def actualizar_material(material_id: int, datos: MaterialCreate, db: Session = D
 
 # Eliminar Material
 @router.delete("/{material_id}")
-def eliminar_material(material_id: int, db: Session = Depends(get_db)):
+def eliminar_material(material_id: int, db: db_dependency):
     try:
         material = db.query(MaterialDB).filter(MaterialDB.id == material_id).first()
         if not material:

@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
-from sqlalchemy.orm import Session
-from backend.db import SessionLocal
 from backend.modelos import MateriaDB
+from backend.db import db_dependency
 from pydantic import BaseModel, ConfigDict
 from typing import List
 import logging
@@ -11,14 +10,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/materias", tags=["materias"])
-
-# Dependencia para obtener la sesión de base de datos
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 # Esquemas Pydantic
 class MateriaCreate(BaseModel):
@@ -34,7 +25,7 @@ class MateriaOut(BaseModel):
 
 # Crear Materia
 @router.post("/", response_model=MateriaOut)
-def crear_materia(materia: MateriaCreate, db: Session = Depends(get_db)):
+def crear_materia(materia: MateriaCreate, db: db_dependency):
     try:
         logger.info(f"Intentando crear materia: {materia.model_dump()}")
         
@@ -60,7 +51,7 @@ def crear_materia(materia: MateriaCreate, db: Session = Depends(get_db)):
 
 # Listar Materias
 @router.get("/", response_model=List[MateriaOut])
-def listar_materias(db: Session = Depends(get_db)):
+def listar_materias(db: db_dependency):
     try:
         materias = db.query(MateriaDB).all()
         logger.info(f"Listando {len(materias)} materias")
@@ -71,7 +62,7 @@ def listar_materias(db: Session = Depends(get_db)):
 
 # Obtener Materia por ID
 @router.get("/{materia_id}", response_model=MateriaOut)
-def obtener_materia(materia_id: int, db: Session = Depends(get_db)):
+def obtener_materia(materia_id: int, db: db_dependency):
     try:
         materia = db.query(MateriaDB).filter(MateriaDB.id == materia_id).first()
         if not materia:
@@ -85,7 +76,7 @@ def obtener_materia(materia_id: int, db: Session = Depends(get_db)):
 
 # Actualizar Materia
 @router.put("/{materia_id}", response_model=MateriaOut)
-def actualizar_materia(materia_id: int, datos: MateriaCreate, db: Session = Depends(get_db)):
+def actualizar_materia(materia_id: int, datos: MateriaCreate, db: db_dependency):
     try:
         materia = db.query(MateriaDB).filter(MateriaDB.id == materia_id).first()
         if not materia:
@@ -106,7 +97,7 @@ def actualizar_materia(materia_id: int, datos: MateriaCreate, db: Session = Depe
 
 # Eliminar Materia
 @router.delete("/{materia_id}")
-def eliminar_materia(materia_id: int, db: Session = Depends(get_db)):
+def eliminar_materia(materia_id: int, db: db_dependency):
     try:
         materia = db.query(MateriaDB).filter(MateriaDB.id == materia_id).first()
         if not materia:
