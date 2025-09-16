@@ -23,6 +23,10 @@ modelos.Base.metadata.create_all(bind=engine)
 
 user_dependency = Annotated[dict, Depends(get_current_user)]
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
 # Autenticacion de usuario - ← CAMBIO: usar db_dependency
 @app.get("/user", status_code=status.HTTP_200_OK)
 async def get_user(user: user_dependency, db: db_dependency):

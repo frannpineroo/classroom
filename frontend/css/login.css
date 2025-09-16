@@ -1,0 +1,186 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.auth-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+.auth-header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    padding: 40px 30px 30px;
+    text-align: center;
+    color: white;
+}
+.auth-header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.auth-header p {
+    opacity: 0.9;
+    font-size: 14px;
+}
+.auth-form {
+    padding: 40px 30px;
+}
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #374151;
+    font-weight: 500;
+    font-size: 14px;
+}
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+.form-group input:invalid {
+    border-color: #ef4444;
+}
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+}
+.btn:active {
+    transform: translateY(0);
+}
+.switch-form {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+.switch-form p {
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+.switch-btn {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.switch-btn:hover {
+    color: #7c3aed;
+    text-decoration: underline;
+}
+.form-container {
+    display: none;
+}
+.form-container.active {
+    display: block;
+}
+.error-message {
+    color: #ef4444;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+.success-message {
+    color: #10b981;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+.loading .btn {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 10px;
+        max-width: none;
+    }
+ 
+    .auth-header {
+        padding: 30px 20px 20px;
+    }
+    .auth-form {
+        padding: 30px 20px;
+    }
+}
+/* Animaciones */
+.form-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Iconos decorativos */
+.form-group {
+    position: relative;
+}
+.form-group::before {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 38px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.3;
+}
+.form-group.email::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/></svg>') no-repeat center;
+}
+.form-group.password::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>') no-repeat center;
+}
+.form-group.username::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>') no-repeat center;
+}

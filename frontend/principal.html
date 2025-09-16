@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Aula Virtual</h1>
+            <nav class="nav">
+                <a href="alumnos.html" class="nav-link">Alumnos</a>
+                <a href="materias.html" class="nav-link">Materias</a>
+                <a href="profesores.html" class="nav-link">Profesores</a>
+                <a href="materiales.html" class="nav-link">Materiales</a>
+                <a href="tareas.html" class="nav-link">Tareas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="welcome-section">
+                <h2>Bienvenido al Aula Virtual</h2>
+                <p>Gestiona tus materias, alumnos, profesores y recursos educativos</p>
+            </section>
+
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="total-materias">0</h3>
+                        <p>Materias</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-alumnos">0</h3>
+                        <p>Alumnos</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-profesores">0</h3>
+                        <p>Profesores</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-tareas">0</h3>
+                        <p>Tareas</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="materias-section">
+                <div class="section-header">
+                    <h2>Materias</h2>
+                    <button class="btn btn-primary" onclick="window.location.href='materias.html'">
+                        Ver todas las materias
+                    </button>
+                </div>
+                <div id="materias-grid" class="materias-grid">
+                    <!-- Las materias se cargarán dinámicamente aquí -->
+                </div>
+            </section>
+
+            <section class="quick-actions">
+                <h2>Acciones Rápidas</h2>
+                <div class="actions-grid">
+                    <div class="action-card" href="crearAlumnos.html">
+                        <div class="action-icon">👨‍🎓</div>
+                        <h3>Crear Alumno</h3>
+                        <p>Agregar un nuevo alumno al sistema</p>
+                    </div>
+                                         <div class="action-card" href="crearMaterias.html">
+                         <div class="action-icon">📚</div>
+                         <h3>Crear Materia</h3>
+                         <p>Agregar una nueva materia</p>
+                     </div>
+                    <div class="action-card" href="profesores.html">
+                        <div class="action-icon">👨‍🏫</div>
+                        <h3>Crear Profesor</h3>
+                        <p>Agregar un nuevo profesor</p>
+                    </div>
+                    <div class="action-card" href="tareas.html">
+                        <div class="action-icon">📝</div>
+                        <h3>Crear Tarea</h3>
+                        <p>Asignar una nueva tarea</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Aula Virtual. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/index.js"></script>
+</body>
+</html> 
