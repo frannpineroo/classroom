@@ -223,48 +223,55 @@ function validateLoginForm(formData) {
 }
 
 // Función para login
-async function handleLogin(formData) {
-    console.log('Intentando login con:', { email: formData.email });
+async function handleLogin(email, password) {
+    try {
+        const formData = new FormData();
+        formData.append('username', email);
+        formData.append('password', password);
 
-    const result = await fetchAPI('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({
-            email: formData.email,
-            password: formData.password
-        })
-    });
+        const response = await fetch('http://localhost:8000/auth/token', {
+            method: 'POST',
+            body: formData
+        });
 
-    if (result.success) {
-        // Guardar token y datos del usuario
-        if (result.data.access_token) {
-            setAuthToken(result.data.access_token);
-        }
-        
-        if (result.data.user) {
-            setUserData(result.data.user);
-        }
+        if (response.ok) {
+            const data = await response.json();
+            
+            // Crear el objeto result que tu código espera
+            const result = {
+                success: true,
+                data: {
+                    access_token: data.access_token,
+                    token_type: data.token_type,
+                    user: null 
+                }
+            };
 
-        showSuccess('login-success', '¡Inicio de sesión exitoso! Redirigiendo...');
-        mostrarNotificacion('¡Bienvenido de nuevo!', 'success');
-        
-        // Redirigir al dashboard después de 2 segundos
-        setTimeout(() => {
-            window.location.href = '/dashboard.html'; // Ajusta según tu estructura
-        }, 2000);
-
-        return true;
-    } else {
-        // Manejar errores específicos
-        if (result.status === 401) {
-            showError('login-general-error', 'Email o contraseña incorrectos');
-        } else if (result.status === 422) {
-            showError('login-general-error', 'Datos de login inválidos');
+            if (result.success) {
+                if (result.data.access_token) {
+                    setAuthToken(result.data.access_token);
+                }
+                
+                if (result.data.user) {
+                    setUserData(result.data.user);
+                }
+                
+                return result;
+            }
         } else {
-            showError('login-general-error', result.error || 'Error al iniciar sesión');
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Credenciales inválidas');
         }
+    } catch (error) {
+        console.error('Error en login:', error);
         
-        mostrarNotificacion('Error al iniciar sesión', 'error');
-        return false;
+        // Crear result para el caso de error
+        const result = {
+            success: false,
+            error: error.message
+        };
+        
+        return result;
     }
 }
 
@@ -347,6 +354,7 @@ async function verificarEstadoAPI() {
 }
 
 // Event listeners para los formularios
+// Event listeners para los formularios
 function setupEventListeners() {
     // Login form
     const loginForm = document.getElementById('loginForm');
@@ -366,12 +374,35 @@ function setupEventListeners() {
             setLoading('loginForm', true);
             
             try {
-                await handleLogin(formData);
+                console.log('Intentando login con:', { email: formData.email });
+                
+                // CAMBIO: Pasar email y password por separado
+                const result = await handleLogin(formData.email, formData.password);
+                
+                // CAMBIO: Manejar el resultado correctamente
+                if (result.success) {
+                    mostrarNotificacion('¡Login exitoso!', 'success');
+                    console.log('Login exitoso, redirigiendo...');
+                    
+                    // Redirigir a la página principal después de un breve delay
+                    setTimeout(() => {
+                        window.location.href = 'http://127.0.0.1:5500/frontend/principal.html';
+                    }, 1000);
+                } else {
+                    // Mostrar error específico
+                    showError('login-general-error', result.error || 'Error de autenticación');
+                    mostrarNotificacion(result.error || 'Error de autenticación', 'error');
+                }
+            } catch (error) {
+                console.error('Error inesperado en login:', error);
+                showError('login-general-error', 'Error inesperado. Intenta nuevamente.');
+                mostrarNotificacion('Error inesperado', 'error');
             } finally {
                 setLoading('loginForm', false);
             }
         });
     }
+}
 
     // Signup form
     const signupForm = document.getElementById('signupForm');
@@ -410,7 +441,6 @@ function setupEventListeners() {
             }
         });
     });
-}
 
 // Función de logout (para usar en otras páginas)
 function logout() {
